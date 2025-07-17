@@ -1,6 +1,7 @@
 package com.progressoft.fxdeals.exceptions;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,24 +14,26 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        System.out.println("=== VALIDATION EXCEPTION CAUGHT ===");
+
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
+            System.out.println("Field: " + fieldName + ", Error: " + errorMessage);
         });
-        return errors;
+
+        System.out.println("Returning errors: " + errors);
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
-    @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(RequestAlreadyExistException.class)
-    public Map<String, String> handleRequestDuplicationExceptions(RequestAlreadyExistException ex) {
+    public ResponseEntity<Map<String, String>> handleRequestDuplicationExceptions(RequestAlreadyExistException ex) {
         Map<String, String> errors = new HashMap<>();
         errors.put("error", ex.getMessage());
-        return errors;
+        return new ResponseEntity<>(errors, HttpStatus.CONFLICT);
     }
-
 }
