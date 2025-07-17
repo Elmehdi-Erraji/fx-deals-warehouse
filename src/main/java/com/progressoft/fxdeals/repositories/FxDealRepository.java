@@ -18,7 +18,7 @@ public interface FxDealRepository extends JpaRepository<FxDeal, Long> {
      * @param dealUniqueId the unique deal identifier
      * @return Optional containing the FX deal if found
      */
-    Optional<FxDeal> findByDealUniqueId(String dealUniqueId);
+    Optional<FxDeal> findById(Long dealUniqueId);
 
     /**
      * Check if deal exists by unique ID

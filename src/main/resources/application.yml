@@ -10,12 +10,16 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/fx_deals_warehouse
     username: fx_user
-    password: fx_password
+    password: fx_pass123
     driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 1
+      connection-timeout: 20000
 
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     show-sql: false
     properties:
       hibernate:
@@ -24,9 +28,9 @@ spring:
     open-in-view: false
 
   flyway:
-    locations: classpath:db/migration
-    baseline-on-migrate: true
     enabled: true
+    baseline-on-migrate: true   # if your database already had tables before using Flyway
+    locations: classpath:db/migration
 
 logging:
   level:

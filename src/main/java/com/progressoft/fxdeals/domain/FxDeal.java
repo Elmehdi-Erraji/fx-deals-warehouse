@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,6 +13,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "fx_deals")
 public class FxDeal {
@@ -51,70 +55,6 @@ public class FxDeal {
         this.toCurrency = toCurrency;
         this.dealTimestamp = dealTimestamp;
         this.dealAmount = dealAmount;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDealUniqueId() {
-        return dealUniqueId;
-    }
-
-    public void setDealUniqueId(String dealUniqueId) {
-        this.dealUniqueId = dealUniqueId;
-    }
-
-    public String getFromCurrency() {
-        return fromCurrency;
-    }
-
-    public void setFromCurrency(String fromCurrency) {
-        this.fromCurrency = fromCurrency;
-    }
-
-    public String getToCurrency() {
-        return toCurrency;
-    }
-
-    public void setToCurrency(String toCurrency) {
-        this.toCurrency = toCurrency;
-    }
-
-    public LocalDateTime getDealTimestamp() {
-        return dealTimestamp;
-    }
-
-    public void setDealTimestamp(LocalDateTime dealTimestamp) {
-        this.dealTimestamp = dealTimestamp;
-    }
-
-    public BigDecimal getDealAmount() {
-        return dealAmount;
-    }
-
-    public void setDealAmount(BigDecimal dealAmount) {
-        this.dealAmount = dealAmount;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     @Override

@@ -23,12 +23,3 @@ ALTER TABLE fx_deals ADD CONSTRAINT chk_from_currency_length CHECK (LENGTH(from_
 ALTER TABLE fx_deals ADD CONSTRAINT chk_to_currency_length CHECK (LENGTH(to_currency) = 3);
 ALTER TABLE fx_deals ADD CONSTRAINT chk_different_currencies CHECK (from_currency != to_currency);
 
--- Add comment to table
-COMMENT ON TABLE fx_deals IS 'Table to store FX deal transactions for Bloomberg data warehouse';
-COMMENT ON COLUMN fx_deals.deal_unique_id IS 'Unique identifier for each FX deal';
-COMMENT ON COLUMN fx_deals.from_currency IS 'Source currency ISO code (3 characters)';
-COMMENT ON COLUMN fx_deals.to_currency IS 'Target currency ISO code (3 characters)';
-COMMENT ON COLUMN fx_deals.deal_timestamp IS 'Timestamp when the deal was executed';
-COMMENT ON COLUMN fx_deals.deal_amount IS 'Deal amount in ordering currency';
-COMMENT ON COLUMN fx_deals.created_at IS 'Record creation timestamp';
-COMMENT ON COLUMN fx_deals.updated_at IS 'Record last update timestamp';
