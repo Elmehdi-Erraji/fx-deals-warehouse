@@ -3,6 +3,7 @@
 FX Deals Warehouse exposes a powerful API for handling Foreign Exchange (FX) deals with comprehensive validation, error handling, and robust data persistence. This documentation provides complete details about the API endpoint, validation, error handling, database interactions, and deployment using Docker.
 
 ## 📋 Table of Contents
+- [Architecture Overview](#architecture-overview)
 - [API Endpoint](#api-endpoint)
 - [Request Validation](#request-validation)
 - [Response Format](#response-format)
@@ -15,6 +16,55 @@ FX Deals Warehouse exposes a powerful API for handling Foreign Exchange (FX) dea
 - [API Usage Examples](#api-usage-examples)
 - [Troubleshooting](#troubleshooting)
 
+
+## Architecture Overview:
+```javascript
+.
+├── docker-compose.yml
+├── Dockerfile
+├── HELP.md
+├── Makefile
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+├── readme.md
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com
+│   │   │       └── progressoft.fxdeals
+│   │   │           ├── Aspect
+│   │   │           │   └── MethodLoggingAspect.java
+│   │   │           ├── configs
+│   │   │           │   └── BeanConfig.java
+│   │   │           ├── controller
+│   │   │           │   └── FXDealsController.java
+│   │   │           ├── DataWarehouseApplication.java
+│   │   │           ├── exceptions
+│   │   │           │   ├── GlobalExceptionHandler.java
+│   │   │           │   └── RequestAlreadyExistException.java
+│   │   │           ├── model
+│   │   │           │   ├── dtos
+│   │   │           │   │   └── FXDealsDto.java
+│   │   │           │   └── entities
+│   │   │           │       └── FXDeals.java
+│   │   │           ├── repository
+│   │   │           │   └── FXDealsRepository.java
+│   │   │           └── service
+│   │   │               ├── FXDealsService.java
+│   │   │               └── implementation
+│   │   │                   └── FXDealsServiceImplementation.java
+│   │   └── resources
+│   │       ├── application.yml
+│   │       ├── static
+│   │       └── templates
+│   └── test
+│       └── java
+│           └── com
+│               └── progressoft.fxdeals.services.implementation
+│                   └── FXDealsServiceImplTest.java
+└── 
+```
 ## 🎯 API Endpoint
 
 ### Primary Endpoint:
