@@ -1,13 +1,17 @@
 server:
   port: 8080
+  address: 0.0.0.0
 
 spring:
   datasource:
-      url: jdbc:postgresql://localhost:5432/fx_deals_warehouse
-      username: fx_user
-      password: fx_pass123
-      driver-class-name: org.postgresql.Driver
-
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/fx_deals_warehouse}
+    username: ${SPRING_DATASOURCE_USERNAME:fx_user}
+    password: ${SPRING_DATASOURCE_PASSWORD:fx_pass123}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      connection-timeout: 30000
 
   jpa:
     hibernate:
@@ -18,6 +22,16 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
 
 logging:
   level:

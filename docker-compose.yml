@@ -9,16 +9,16 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:postgresql://fx-postgres:5432/fx_deals_warehouse
       - SPRING_DATASOURCE_USERNAME=fx_user
       - SPRING_DATASOURCE_PASSWORD=fx_pass123
+      - SERVER_ADDRESS=0.0.0.0
     networks:
       - fx-deals-network
     depends_on:
       fx-postgres:
         condition: service_healthy
-    restart: unless-stopped
+    restart: "no"  # Temporarily disable restart to see errors
 
   fx-postgres:
     container_name: fx-deals-postgres-db
@@ -38,6 +38,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 30s
     restart: unless-stopped
 
 networks:
